@@ -1,4 +1,4 @@
-// Write a program to calculate the area and circumference of a circle given its radius
+// Write a program to calculate the area and circumference of a circle given its radiu
 
 #include <stdio.h>
 #define PI 3.14159
