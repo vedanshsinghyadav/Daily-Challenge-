@@ -1,7 +1,7 @@
 /*
    Ques: Write a program in C to find the sum of the series:
          1 + 3/4 + 5/6 + 7/8 + ... up to n terms.
-   File Name: series_sum.c
+   
 */
 
 #include <stdio.h>

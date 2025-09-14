@@ -1,6 +1,6 @@
 /*
    Ques: Write a program in C to check whether a given number is a Strong Number or not.
-   File Name: strong_number.c
+   
 */
 
 #include <stdio.h>
