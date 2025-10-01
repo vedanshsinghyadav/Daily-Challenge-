@@ -1,7 +1,6 @@
-/*Check if the elements on the diagonal of a matrix are distinct*/
+/*Find the sum of main diagonal elements for a square matrix.*/
 
 #include <stdio.h>
-
 
 int main() {
     int n;
@@ -25,24 +24,14 @@ int main() {
         printf("\n");
     }
 
-    int flag = 1; // assume distinct
-    // check diagonal distinctness
+    int sum = 0;
+    printf("\nMain diagonal elements are: ");
     for (int i = 0; i < n; i++) {
-        for (int j = i + 1; j < n; j++) {
-            if (matrix[i][i] == matrix[j][j]) {
-                flag = 0;
-                break;
-            }
-        }
-        if (!flag) break;
+        printf("%d ", matrix[i][i]);
+        sum += matrix[i][i];
     }
 
-    printf("\nChecking distinctness of diagonal elements...\n");
-
-    if (flag)
-        printf("Result: All diagonal elements are DISTINCT.\n");
-    else
-        printf("Result: Diagonal elements are NOT distinct.\n");
+    printf("\n\nSum of main diagonal elements = %d\n", sum);
 
     return 0;
 }
