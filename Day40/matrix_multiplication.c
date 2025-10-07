@@ -1,3 +1,5 @@
+/*Multiply two matrices.*/
+
 #include <stdio.h>
 
 int main() {
