@@ -1,32 +1,43 @@
+/*Perform diagonal traversal of a matrix*/
+
 #include <stdio.h>
 
 int main() {
-    int rows, cols;
-    printf("Enter number of rows and columns: ");
-    scanf("%d %d", &rows, &cols);
+    int m, n;
 
-    int matrix[100][100];
-    printf("Enter matrix elements:\n");
-    for(int i=0; i<rows; i++){
-        for(int j=0; j<cols; j++){
-            scanf("%d", &matrix[i][j]);
+    // Step 1: Matrix size input
+    printf("Enter number of rows: ");
+    scanf("%d", &m);
+    printf("Enter number of columns: ");
+    scanf("%d", &n);
+
+    int mat[100][100];
+
+    // Step 2: Input matrix elements
+    printf("Enter matrix elements row by row:\n");
+    for(int i=0; i<m; i++) {
+        for(int j=0; j<n; j++) {
+            printf("Element at row %d, column %d: ", i+1, j+1);
+            scanf("%d", &mat[i][j]);
         }
     }
 
-    printf("Diagonal traversal of the matrix:\n");
+    // Step 3: Diagonal traversal
+    printf("\nDiagonal Traversal of the matrix:\n");
+    // Total diagonals = m + n - 1
+    for(int d=0; d < m+n-1; d++) {
+        // starting row for this diagonal
+        int start_row = (d < n) ? 0 : d - n + 1;
+        // number of elements in this diagonal
+        int count = (d < n) ? d + 1 : n + m - d - 1;
 
-    // There are rows+cols-1 diagonals
-    for(int d = 0; d < rows + cols - 1; d++) {
-        // Determine the starting point of diagonal
-        int row = (d < cols) ? 0 : d - cols + 1;
-        int col = (d < cols) ? d : cols - 1;
-
-        // Traverse the current diagonal
-        while(row < rows && col >= 0) {
-            printf("%d ", matrix[row][col]);
-            row++;
-            col--;
+        printf("Diagonal %d: ", d+1);
+        for(int i=0; i<count; i++) {
+            int r = start_row + i;   // row index
+            int c = d - r;           // column index
+            printf("%d ", mat[r][c]);
         }
+        printf("\n");
     }
 
     return 0;
