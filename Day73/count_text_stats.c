@@ -6,45 +6,60 @@
 #include <ctype.h>
 
 int main() {
-    FILE *fp;
-    char filename[100], ch;
+    FILE *file;
+    char filename[100];
+    char ch;
     int characters = 0, words = 0, lines = 0;
-    int inWord = 0;
-
-    // File name input
-    printf("Enter file name: ");
+    int in_word = 0;  // Flag to track if we're currently in a word
+    
+    // Get filename from user
+    printf("Enter filename: ");
     scanf("%s", filename);
-
-    fp = fopen(filename, "r");
-
-    if (fp == NULL) {
-        printf("Error opening file.\n");
+    
+    // Open file
+    file = fopen(filename, "r");
+    if (file == NULL) {
+        printf("Error: Could not open file %s\n", filename);
         return 1;
     }
-
-    while ((ch = fgetc(fp)) != EOF) {
+    
+    // Read file character by character
+    while ((ch = fgetc(file)) != EOF) {
         characters++;
-
-        if (ch == '\n')
+        
+        // Count lines
+        if (ch == '\n') {
             lines++;
-
-        if (isspace(ch))
-            inWord = 0;
-        else if (inWord == 0) {
-            inWord = 1;
-            words++;
+            if (in_word) {
+                in_word = 0;
+            }
+        }
+        // Count words (non-space character starts a word)
+        else if (ch == ' ' || ch == '\t') {
+            if (in_word) {
+                in_word = 0;
+            }
+        }
+        else {
+            if (!in_word) {
+                words++;
+                in_word = 1;
+            }
         }
     }
-
-    fclose(fp);
-
-    // If file doesn’t end with newline, still count last line
-    if (characters > 0 && ch != '\n')
+    
+    // If file doesn't end with newline but has content, count it as a line
+    if (characters > 0 && ch != '\n') {
         lines++;
-
-    printf("Characters: %d\n", characters);
+    }
+    
+    // Close file
+    fclose(file);
+    
+    // Display results
+    printf("\nCharacters: %d\n", characters);
     printf("Words: %d\n", words);
     printf("Lines: %d\n", lines);
-
+    
     return 0;
 }
